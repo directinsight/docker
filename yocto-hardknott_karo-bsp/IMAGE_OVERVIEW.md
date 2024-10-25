@@ -1,6 +1,6 @@
 Note: user/pass for running BSP builds is **yoctosdk/yoctosdk**.    
 
-Create an empty mount point on the host: **/home/<USER>/docker/volume/yocto**   
+Create an empty mount point on the host: `/home/<USER>/docker/volume/yocto`   
 where **<USER>** is the user name on the host.     
 This is where the images will be built and will persist even if the container is eventually deleted.     
 
