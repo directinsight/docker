@@ -81,8 +81,15 @@ docker ps
 
 
 # stop a running docker container
-
 docker stop myubuntucontainer
+
+# stop all docker containers
+docker stop $(docker ps -a -q)
+
+
+# remove all docker containers
+docker rm $(docker ps -a -q)
+
 
 
 
