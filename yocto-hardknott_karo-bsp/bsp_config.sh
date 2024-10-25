@@ -6,9 +6,9 @@ git config --global color.ui auto
 mkdir /home/yoctosdk/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > /home/yoctosdk/bin/repo
 chmod a+x /home/yoctosdk/bin/repo
-## The PATH ise set in /etc/profile
-#echo "export PATH=~/bin:$PATH" >> /home/yoctosdk/.bashrc
-#export PATH=~/bin:$PATH
+## The PATH is also set in /etc/profile
+echo "export PATH=~/bin:$PATH" >> /home/yoctosdk/.bashrc
+export PATH=~/bin:$PATH
 mkdir /home/yoctosdk/karo-bsp
 cd /home/yoctosdk/karo-bsp
 repo init -u https://github.com/karo-electronics/karo-bsp -b hardknott
