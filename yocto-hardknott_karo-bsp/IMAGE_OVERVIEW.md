@@ -35,7 +35,7 @@ Note that you may need to run the above command twice.
 `bitbake karo-image-minimal` 
 
 
-If you get build errors simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
+If you get build errors (eg ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure) simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
 
 Notice that Yocto configuration files can either be modified from the container using the `nano` editor or from the host using your preferred editor.  
   
