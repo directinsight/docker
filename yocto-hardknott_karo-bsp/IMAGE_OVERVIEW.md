@@ -1,13 +1,13 @@
 Note: user/pass for running BSP builds is **yoctosdk/yoctosdk**.    
 
-Create an empty mount point on the host: **/home/armsdk/docker/volume/yocto**   
-where **armsdk** is the user name on the host.     
+Create an empty mount point on the host: **/home/<USER>/docker/volume/yocto**   
+where **<USER>** is the user name on the host.     
 This is where the images will be built and will persist even if the container is eventually deleted.     
 
 Setup the container from this docker image - run the following commands on the host: 
      
 `docker pull wrwdi/yocto-hardknott_karo-bsp`    
-`docker run --name yocto-hardknott_karo-bsp --rm -it -v /home/armsdk/docker/volume/yocto:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
+`docker run --name yocto-hardknott_karo-bsp --rm -it -v /home/<USER>/docker/volume/yocto:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
 
 The `--rm` option ensures that the docker container is removed when you exit it so you don't have to remember to clean up.  
 
@@ -31,7 +31,7 @@ Build an image in the container, for example form the `karo_bsp` directory:
 
 Note that you may need to run the above command twice.  
      
-`echo SSTATE_MIRRORS = "file://.* http://sstate.karo-electronics.de/hardknott/PATH\" >> conf/local.conf`    
+`echo SSTATE_MIRRORS = \"file://.* http://sstate.karo-electronics.de/hardknott/PATH\" >> conf/local.conf`    
 `bitbake karo-image-minimal` 
 
 
