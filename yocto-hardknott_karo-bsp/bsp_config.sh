@@ -11,5 +11,5 @@ echo "export PATH=~/bin:$PATH" >> /home/yoctosdk/.bashrc
 export PATH=~/bin:$PATH
 mkdir /home/yoctosdk/karo-bsp
 cd /home/yoctosdk/karo-bsp
-repo init -u https://github.com/karo-electronics/karo-bsp -b hardknott
-repo sync
+~/bin/repo init -u https://github.com/karo-electronics/karo-bsp -b hardknott
+~/bin/repo sync
