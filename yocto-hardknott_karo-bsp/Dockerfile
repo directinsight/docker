@@ -1,5 +1,7 @@
 ## Dockerfile for karo-nxp Hardknott
 
+## https://hub.docker.com/r/wrwdi/yocto-hardknott_karo-bsp
+
 ## Create a file called Dockerfile containing this text and add to a directory on your host
 ## Now Run this Dockerfile with the command below in the same directory as the Dockerfile:
 ## docker build -t <Docker IMAGE Name> .
