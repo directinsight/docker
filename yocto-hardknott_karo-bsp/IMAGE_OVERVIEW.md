@@ -57,7 +57,7 @@ After the image is built, it is safe to exit and/or delete the container. The bu
   
 
 ### Additional documentation  
-https://github.com/directinsight/docker/blob/main/yocto-hardknott_karo-bsp  
+https://github.com/directinsight/docker/tree/master/yocto-hardknott_karo-bsp  
 
 
 
