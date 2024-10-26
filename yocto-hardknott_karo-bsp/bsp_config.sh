@@ -7,7 +7,7 @@ mkdir /home/yoctosdk/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > /home/yoctosdk/bin/repo
 chmod a+x /home/yoctosdk/bin/repo
 ## The PATH is also set in /etc/profile
-echo "export PATH=~/bin:$PATH" >> /home/yoctosdk/.bashrc
+echo "export PATH=~/bin:$PATH" > /home/yoctosdk/.bashrc
 export PATH=~/bin:$PATH
 mkdir /home/yoctosdk/karo-bsp
 cd /home/yoctosdk/karo-bsp

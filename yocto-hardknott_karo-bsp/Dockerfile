@@ -66,6 +66,6 @@ USER yoctosdk
 
 WORKDIR /home/yoctosdk    
 #SHELL ["/bin/bash", "-c"]
-SHELL /bin/bash -i
-#CMD ["/bin/bash"]
+SHELL ["/bin/bash", "--login"]
+#CMD /bin/bash
 
