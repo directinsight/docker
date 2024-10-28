@@ -1,15 +1,16 @@
 Note: user/pass for running BSP builds is **yoctosdk/yoctosdk**.    
 
 Create an empty mount point on the host: `/home/<USER>/docker/volume/yocto`   
-where **<USER>** is the user name on the host.     
-This is where the images will be built and will persist even if the container is eventually deleted.     
+where `<USER>` is the user name on the host.     
+This is where the images will be built and will persist even if the container is deleted.     
 
-Setup the container from this docker image - run the following commands on the host: 
+Setup the container from this docker image by running the following commands on the host: 
      
 `docker pull wrwdi/yocto-hardknott_karo-bsp`    
 `docker run --name yocto-hardknott_karo-bsp --rm -it -v /home/<USER>/docker/volume/yocto:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
 
-The `--rm` option ensures that the docker container is removed when you exit it so you don't have to remember to clean up.  
+Replace `<USER>` with the appropriate user name.   
+The `--rm` option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up.  
 
 If you wish to build the image within the container rather than on the mount point in the host, simply remove the `-v` option:  
 `docker run --name yocto-hardknott_karo-bsp --rm -it wrwdi/yocto-hardknott_karo-bsp` 
@@ -35,11 +36,11 @@ Note that you may need to run the above command twice.
 `bitbake karo-image-minimal` 
 
 
-If you get build errors (eg ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure) simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
+If you get build errors (eg "ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure" or simular) simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
 
 Notice that Yocto configuration files can either be modified from the container using the `nano` editor or from the host using your preferred editor.  
   
-If you exit the container it will automatically be removed, however the build directory will persist on the host. If you need to modify the build, simply run the `docker run ....` command above and type the following in the container to setup the correct environment for Yocto builds:    
+If you exit the container it will automatically be removed, however the build directory will persist on the host. If you need to modify the build, simply run the `docker run ....` command above and type the following in the container to setup the correct environment for the Yocto builds:    
  
 `cd ~/karo-bsp`   
 `source setup-environment build-5011-minimal`  
