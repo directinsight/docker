@@ -65,7 +65,7 @@ USER yoctosdk
 #    ../bin/repo sync
 
 WORKDIR /home/yoctosdk    
-#SHELL ["/bin/bash", "-c"]
-SHELL ["/bin/bash", "--login"]
+SHELL ["/bin/bash", "-c"]
+#SHELL ["/bin/bash", "--login"]
 #CMD /bin/bash
 
