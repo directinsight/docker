@@ -44,7 +44,7 @@ If you exit the container it will automatically be removed, however the build di
 `source setup-environment build-qs93-5210`    
  
 See the Karo documentation on Yocto for more details on builds:  
-https://karo-electronics.github.io/docs/yocto-guide/mainline/setup.html  
+https://karo-electronics.github.io/docs/yocto-guide/nxp/setup.html  
   
 After the image is built, it is safe to exit and/or delete the container. The build directory will persist on the host:  
 **/home/armsdk/docker/volume/yocto/karo-bsp**  
@@ -56,7 +56,8 @@ After the image is built, it is safe to exit and/or delete the container. The bu
   
 
 ### Additional documentation  
-https://github.com/directinsight/docker/tree/master/yocto-hardknott_karo-bsp  
+https://github.com/directinsight/docker/tree/master/yocto-mickledore_karo-nxp-bsp
+
 
 
 
