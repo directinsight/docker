@@ -19,9 +19,10 @@ If you wish to build the image within the container rather than on the mount poi
 
 You will now be in a `bash` shell in the running container as user `yoctosdk`     
 
-Configure the TX6 Yocto Hardknott BSP by running the following script in the container:  
+Configure the TX6 Yocto Hardknott BSP by running the following scripts in the container:  
 
-`/bsp_config.sh`  
+`/bsp_config.sh`   
+`source .bashrc`  
 
 The Yocto Hardknott BSP is initialise in the ~/karo-bsp directory.  
 
