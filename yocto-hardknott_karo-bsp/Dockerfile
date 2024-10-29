@@ -41,7 +41,6 @@ RUN apt-get install -y locales && \
    
 COPY bsp_config.sh /bsp_config.sh
 RUN chmod a+xr /bsp_config.sh
-#    echo "export PATH=~/bin:$PATH" >> /etc/profile   
 
 ## Note need to add the correct path for repo to /etc/profile since it does not get read correctly in the .bashrc, see:
 ## <https://stackoverflow.com/questions/55206227/why-bashrc-is-not-executed-when-run-docker-container>
