@@ -29,13 +29,13 @@ Build an image in the container, for example form the `karo-bsp` directory:
 `repo sync`  
 `DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-5011-minimal`   
 
-Note that you may need to run the above command twice.  
+Note that you will need to run the above command twice.  
      
 `echo SSTATE_MIRRORS = \"file://.* http://sstate.karo-electronics.de/hardknott/PATH\" >> conf/local.conf`    
 `bitbake karo-image-minimal` 
 
 
-If you get build errors (eg "ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure" or simular) simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
+If you get build errors (eg "ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure" or simular) simply run `bitbake` again. It may be necessary to do this several times before you get a clean build but it should eventually build.  
 
 Notice that Yocto configuration files can either be modified from the container using the `nano` editor or from the host using your preferred editor.  
   
