@@ -6,15 +6,15 @@ Create an empty mount point on the host: `$HOME/TARGET_BUILD_DIR`
 Setup the `TARGET_BUILD_DIR` on the host and the container from this docker image by running the following commands on the host.  
 You can change the `TARGET_BUILD_DIR` to whatever you wish:  
      
-`TARGET_BUILD_DIR=docker/volume/yocto/hardknott` 
+`TARGET_BUILD_DIR=docker/volume/yocto/mickledore` 
 `mkdir -p $HOME/$TARGET_BUILD_DIR`
-`docker pull wrwdi/yocto-hardknott_karo-bsp`    
-`docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$TARGET_BUILD_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
+`docker pull wrwdi/yocto-mickledore_karo-nxp-bsp`    
+`docker run --name yocto-mickledore_karo-nxp-bsp --rm -it -v $HOME/$TARGET_BUILD_DIR:/home/yoctosdk wrwdi/yocto-mickledore_karo-nxp-bsp` 
 
 The `--rm` option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up.  
 
 If you wish to build the image within the container rather than on the mount point in the host, simply remove the `-v` option:  
-`docker run --name yocto-hardknott_karo-bsp --rm -it wrwdi/yocto-hardknott_karo-bsp`  
+`docker run --name yocto-mickledore_karo-nxp-bsp --rm -it wrwdi/yocto-mickledore_karo-nxp-bsp`  
 
 You will now be in a `bash` shell in the running container as user `yoctosdk`     
 
@@ -22,27 +22,26 @@ Configure the TX6 Yocto Hardknott BSP by running the following scripts in the co
 
 `source /bsp_config.sh`   
 
-The Yocto Hardknott BSP is initialise in `$HOME/TARGET_BUILD_DIR`.    
+The Yocto Mickledore BSP is initialise in `$HOME/TARGET_BUILD_DIR`.    
 
-Build an image in the container, for example form the `karo-bsp` directory:    
-   
+Build an image in the container, for example form the `karo-nxp-bsp` directory:
+
 `repo sync`  
-`DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-5011-minimal`   
+`KARO_BASEBOARD=qsbase93`  
+`DISTRO=karo-minimal MACHINE=qs93-5210 source karo-setup-release.sh -b build-qs93-5210`  
 
+  
 Note that you may need to run the above command twice.  
-     
-`echo SSTATE_MIRRORS = \"file://.* http://sstate.karo-electronics.de/hardknott/PATH\" >> conf/local.conf`    
+
+`echo SSTATE_MIRRORS = \"file://.* http://sstate.karo-electronics.de/mickledore/PATH\" >> conf/local.conf`  
 `bitbake karo-image-minimal` 
-
-
-If you get build errors (eg "ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure" or simular) simply run `bitbake` again. It may be necessary to do this two or three times before you get a clean build.   
 
 Notice that Yocto configuration files can either be modified from the container using the `nano` editor or from the host using your preferred editor.  
   
 If you exit the container it will automatically be removed, however the build directory will persist on the host. If you need to modify the build, simply run the `docker run ....` command above and type the following in the container to setup the correct environment for the Yocto builds:    
  
-`cd ~/karo-bsp`   
-`source setup-environment build-5011-minimal`  
+`cd ~/karo-nxp-bsp`   
+`source setup-environment build-qs93-5210`    
  
 See the Karo documentation on Yocto for more details on builds:  
 https://karo-electronics.github.io/docs/yocto-guide/mainline/setup.html  

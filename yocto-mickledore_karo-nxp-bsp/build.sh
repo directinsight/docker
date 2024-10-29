@@ -1,10 +1,10 @@
-docker build -t wrwdi/yocto-hardknott_karo-bsp:latest .
+docker build -t wrwdi/yocto-mickledore_karo-nxp-bsp:latest .
 
 
 ## Here is a sequential list of commands to build an image in this container
 
 ## On the host configure the build directory:
-# TARGET_BUILD_DIR=docker/volume/yocto/hardknott
+# TARGET_BUILD_DIR=ddocker/volume/yocto/mickledore
 # mkdir -p $HOME/$TARGET_BUILD_DIR  
 
 ## Start the container and mount the build directory on the host:
