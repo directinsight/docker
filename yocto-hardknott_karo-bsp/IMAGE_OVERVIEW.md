@@ -11,7 +11,7 @@ You can change the `YOCTO_BSP_DIR` to whatever you wish:
 `docker pull wrwdi/yocto-hardknott_karo-bsp`    
 `docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$YOCTO_BSP_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
   
-The `--rm` option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up.  
+The `--rm` option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up. If you wish the container to persist do not use the `--rm` option.    
   
 If you wish to build the image within the container rather than on the mount point in the host, simply remove the `-v` option:  
 `docker run --name yocto-hardknott_karo-bsp --rm -it wrwdi/yocto-hardknott_karo-bsp`  
@@ -29,9 +29,9 @@ Setup the build environment in the container for the required Yocto distro, modu
   
 `DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-5011-minimal`  
   
-Note that you will need to run the above command twice. You will now be in the Yocto build sub-directory. In this example build-5011-minimal.  
+Note that you will need to run the above command twice. You will now be in the Yocto build sub-directory. In this example `build-5011-minimal`.    
   
-The BSP has not been updated since May 2024 so modifications to some of the Yocto recepies are required. Run the following commands from the `$HOME/TARGET_BUILD_DIR`  
+The BSP has not been updated since May 2024 so modifications to some of the Yocto recepies are required. Run the following commands from the `build-5011-minimal`.  
   
 There is no sstate cache for the hardknott branch on Karo's sstate mirror; remove it from the local.conf file:  
   
