@@ -35,13 +35,16 @@ The BSP has not been updated since May 2024 so modifications to some of the Yoct
   
 There is no sstate cache for the hardknott branch on Karo's sstate mirror; remove it from the local.conf file:  
   
-`sed` -i '19,21d' conf/local.conf`  
+`sed -i '19,21d' conf/local.conf``  
   
 Some GitHub repos have changed from master to main branch. Update the affected repos as follows:    
   
 `sed -i 's\SRC_URI = "git://github.com/KhronosGroup/SPIRV-Headers;protocol=https"\SRC_URI = "git://github.com/KhronosGroup/SPIRV-Headers;protocol=https;branch=main"\g' ../layers/poky/meta/recipes-graphics/spir/spirv-headers_1.5.4.bb`  
-'sed -i 's\SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git \SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;branch=main \g' ../layers/poky/meta/recipes-graphics/spir/spirv-tools_2020.7.bb`  
+
+`sed -i 's\SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git \SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;branch=main \g' ../layers/poky/meta/recipes-graphics/spir/spirv-tools_2020.7.bb`  
+
 `sed -i 's\SRC_URI = "git://github.com/KhronosGroup/glslang.git;protocol=https\SRC_URI = "git://github.com/KhronosGroup/glslang.git;protocol=https;branch=main\g' ../layers/poky/meta/recipes-graphics/glslang/glslang_11.2.0.bb`  
+
 `sed -i 's\SRC_URI = "git://github.com/KhronosGroup/Vulkan-Loader.git\SRC_URI = "git://github.com/KhronosGroup/Vulkan-Loader.git;branch=main\g' ../layers/poky/meta/recipes-graphics/vulkan/vulkan-loader_1.2.170.0.bb`   
   
 The /etc/fstab file is incorrect for the TXUL and TX6 range of modules. Update it:    
