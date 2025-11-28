@@ -23,7 +23,7 @@ Configure the TX6 Yocto Hardknott BSP by running the following scripts in the co
 `source /bsp_config.sh`   
 `repo sync`  
   
-The Yocto Hardknott BSP is initialise in `$HOME/TARGET_BUILD_DIR`.    
+The Yocto Hardknott BSP is initialised in `$HOME/TARGET_BUILD_DIR`.    
   
 Setup the build environment in the container for the required Yocto distro, module and targer recipe for example form the `karo-bsp` directory:    
   
