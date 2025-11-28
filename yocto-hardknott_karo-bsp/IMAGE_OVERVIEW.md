@@ -1,15 +1,15 @@
 Note: user/pass for running BSP builds is **yoctosdk/yoctosdk**.    
   
-Create an empty mount point on the host: `$HOME/TARGET_BUILD_DIR`     
-`TARGET_BUILD_DIR` is where the images will be built and will persist even if the container is deleted (see example below).       
+Create an empty mount point on the host: `$HOME/YOCTO_BSP_DIR`     
+`YOCTO_BSP_DIR` is where the images will be built and will persist even if the container is deleted (see example below).       
   
-Setup the `TARGET_BUILD_DIR` on the host and the container from this docker image by running the following commands on the host.  
-You can change the `TARGET_BUILD_DIR` to whatever you wish:  
+Setup the `YOCTO_BSP_DIR` on the host and the container from this docker image by running the following commands on the host.  
+You can change the `YOCTO_BSP_DIR` to whatever you wish:  
        
-`TARGET_BUILD_DIR=docker/volume/yocto/hardknott` 
-`mkdir -p $HOME/$TARGET_BUILD_DIR`
+`YOCTO_BSP_DIR=docker/volume/yocto/hardknott` 
+`mkdir -p $HOME/$YOCTO_BSP_DIR`
 `docker pull wrwdi/yocto-hardknott_karo-bsp`    
-`docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$TARGET_BUILD_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
+`docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$YOCTO_BSP_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
   
 The `--rm` option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up.  
   
@@ -23,19 +23,19 @@ Configure the TX6 Yocto Hardknott BSP by running the following scripts in the co
 `source /bsp_config.sh`   
 `repo sync`  
   
-The Yocto Hardknott BSP is initialised in `$HOME/TARGET_BUILD_DIR`.    
+The Yocto Hardknott BSP is initialised in `$HOME/YOCTO_BSP_DIR`.    
   
 Setup the build environment in the container for the required Yocto distro, module and targer recipe for example form the `karo-bsp` directory:    
   
 `DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-5011-minimal`  
   
-Note that you will need to run the above command twice.  
+Note that you will need to run the above command twice. You will now be in the Yocto build sub-directory. In this example build-5011-minimal.  
   
 The BSP has not been updated since May 2024 so modifications to some of the Yocto recepies are required. Run the following commands from the `$HOME/TARGET_BUILD_DIR`  
   
 There is no sstate cache for the hardknott branch on Karo's sstate mirror; remove it from the local.conf file:  
   
-`sed -i '19,21d' conf/local.conf``  
+`sed -i '19,21d' conf/local.conf`  
   
 Some GitHub repos have changed from master to main branch. Update the affected repos as follows:    
   
