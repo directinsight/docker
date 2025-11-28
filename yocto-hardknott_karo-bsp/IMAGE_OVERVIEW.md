@@ -6,7 +6,7 @@ Create an empty mount point on the host: `$HOME/YOCTO_BSP_DIR`
 Setup the `YOCTO_BSP_DIR` on the host and the container from this docker image by running the following commands on the host.  
 You can change the `YOCTO_BSP_DIR` to whatever you wish:  
        
-`YOCTO_BSP_DIR=docker/volume/yocto/hardknott` 
+`YOCTO_BSP_DIR=docker/volume/yocto/hardknott`   
 `mkdir -p $HOME/$YOCTO_BSP_DIR`
 `docker pull wrwdi/yocto-hardknott_karo-bsp`    
 `docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$YOCTO_BSP_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
