@@ -8,7 +8,7 @@ You can change the **YOCTO_BSP_DIR** to whatever you wish:
        
 `YOCTO_BSP_DIR=docker/volume/yocto/hardknott`   
 `mkdir -p $HOME/$YOCTO_BSP_DIR`
-`docker pull wrwdi/yocto-hardknott_karo-bsp`    
+`docker pull wrwdi/yocto-hardknott_karo-bsp`   
 `docker run --name yocto-hardknott_karo-bsp --rm -it -v $HOME/$YOCTO_BSP_DIR:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp` 
   
 The **--rm** option ensures that the docker container is removed when you exit the container, so you don't have to remember to clean up. If you wish the container to persist do not use the **--rm** option.    
@@ -22,6 +22,7 @@ Configure the TX6 Yocto Hardknott BSP by running the following scripts in the co
   
 `source /bsp_config.sh`   
 `repo sync`  
+`curl https://github.com/directinsight/docker/blob/master/yocto-hardknott_karo-bsp/bsp_fix_recipe.sh > ../bsp_fix_recipe.sh`  
   
 The Yocto Hardknott BSP is initialised in **$HOME/YOCTO_BSP_DIR**.    
   
