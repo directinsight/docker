@@ -22,7 +22,6 @@ Configure the TX6 Yocto Hardknott BSP by running the following scripts in the co
   
 `source /bsp_config.sh`   
 `repo sync`  
-`curl https://github.com/directinsight/docker/blob/master/yocto-hardknott_karo-bsp/bsp_fix_recipe.sh > ../bsp_fix_recipe.sh`  
   
 The Yocto Hardknott BSP is initialised in **$HOME/YOCTO_BSP_DIR**.    
   
@@ -33,6 +32,8 @@ Setup the build environment in the container for the required Yocto distro, modu
 Note that you will need to run the above command twice. You will now be in the Yocto build sub-directory. In this example **build-5011-minimal**.    
   
 The BSP has not been updated since May 2024 so modifications to some of the Yocto recepies are required. Run the following commands from the **build-5011-minimal**.  
+
+`/source/bsp_fix_recipe.sh`  
   
 There is no sstate cache for the hardknott branch on Karo's sstate mirror; remove it from the **local.conf** file:  
   

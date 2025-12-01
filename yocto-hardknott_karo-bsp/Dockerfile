@@ -37,12 +37,12 @@ RUN apt-get install -y locales && \
     echo 'yoctosdk:yoctosdk' | chpasswd && \
     usermod -aG sudo yoctosdk
     
-## The above generates warnings about "Setting locale failed" beut it still seems to work okay
+## The above generates warnings about "Setting locale failed" but it still seems to work okay
    
 COPY bsp_config.sh /bsp_config.sh
 RUN chmod a+xr /bsp_config.sh
 
-COPY bsp_config.sh /bsp_fix_recipe.sh
+COPY bsp_fix_recipe.sh /bsp_fix_recipe.sh
 RUN chmod a+xr /bsp_fix_recipe.sh
 
 ## Note need to add the correct path for repo to /etc/profile since it does not get read correctly in the .bashrc, see:
