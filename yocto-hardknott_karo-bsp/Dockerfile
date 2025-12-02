@@ -4,10 +4,10 @@
 
 ## Create a file called Dockerfile containing this text and add to a directory on your host
 ## Now Run this Dockerfile with the command below in the same directory as the Dockerfile:
-## docker build -t <Docker IMAGE Name> .
+## docker build --tag <Docker IMAGE Name> .
 ## Final image name should be "wrwdi/yocto-hardknott_karo-bsp:<TAG>"  
-## Example:
-## docker run --name yocto-hardknott_karo-bsp --rm -it wrwdi/yocto-hardknott_karo-bsp:next
+## Example (note the "." at the end of the command):
+## docker build --tag wrwdi/yocto-hardknott_karo-bsp:next .
 
 ## It is safe to ignore error messages:
 ## "debconf: delaying package configuration, since apt-utils is not installed"
