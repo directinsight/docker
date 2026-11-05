@@ -21,6 +21,10 @@
 
 ## Start build
 FROM ubuntu:20.04
+LABEL org.opencontainers.image.title="yocto-hardknott_karo-bsp" \
+      org.opencontainers.image.description="Build environment for the Karo TX6 Yocto hardknott BSP" \
+      org.opencontainers.image.source="https://github.com/directinsight/docker/tree/master/yocto-hardknott_karo-bsp" \
+      org.opencontainers.image.base.name="ubuntu:20.04"
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y gawk wget git diffstat unzip 
 RUN DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get install -y texinfo 
@@ -30,11 +34,14 @@ RUN apt-get install -y gcc build-essential chrpath socat cpio python3 python3-pi
 #RUN dpkg-reconfigure locales <select 159. en_US.UTF-8 UTF-8>
 ## For noninteractive see: <https://serverfault.com/questions/362903/how-do-you-set-a-locale-non-interactively-on-debian-ubuntu>:
 
+RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ARG UID=1000 GID=1000
 RUN apt-get install -y locales && \
     echo "$LANG UTF-8" > /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=$LANG && \   
+    update-locale LANG=$LANG && \
     useradd -ms /bin/bash yoctosdk && \
     echo 'yoctosdk:yoctosdk' | chpasswd && \
     usermod -aG sudo yoctosdk
