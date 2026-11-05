@@ -35,7 +35,7 @@ container> repo sync
   
 The Yocto Hardknott BSP is initialized in **~/karo-bsp** in the container, which is a mounted docker volume **~/docker-karo-bsp/hardknott/karo-bsp** on the host.      
   
-Setup the build environment in the container for the required Yocto distro, module and targer recipe for example form the **karo-bsp** directory:    
+Setup the build environment in the container for the required Yocto distro, module and target recipe for example forom the **karo-bsp** directory:    
   
 ```
 container> DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-5011-minimal
@@ -43,7 +43,7 @@ container> DISTRO=karo-minimal MACHINE=txul-5011 source setup-environment build-
   
 Note that you will need to run the above command twice. You will now be in the Yocto build sub-directory. In this example **build-5011-minimal**.    
   
-The BSP has not been updated since May 2024 so modifications to some of the Yocto recepies are required. Run the following commands from the **~/karo-bsp/build-5011-minimal** directory.  
+The BSP has not been updated since May 2024 so modifications to some of the Yocto recipes are required. Run the following commands from the **~/karo-bsp/build-5011-minimal** directory.  
 
 ```
 container> source /bsp_fix_recipe.sh
@@ -65,7 +65,7 @@ Notice that Yocto configuration files in the **conf** directory can either be mo
 
 If you get build errors assocoated with a **do_fetch** (eg "ERROR: libpcre-native-8.44-r0 do_fetch: Fetcher failure") or simular simply run `bitbake` again. It may be necessary to do this several times before you get a clean build but it should eventually build. It is not unusual for the source of the download to sometimes go offline for a short period of time. If the build continues to fail then it will be necessary to find where the source has move to and edit the recipe ( see **/bsp_fix_recipe.sh** as an example).    
 
-If you get build errors associated with a **do_compile** (eg `sources/poky/meta/recipes-devtools/gcc/gcc-cross_13.4.bb:do_compile failed with exit code '1'`), this can be due to a currupt download. You should clean the download and try the build again. Run the following commands and build again:    
+If you get build errors associated with a **do_compile** (eg `sources/poky/meta/recipes-devtools/gcc/gcc-cross_13.4.bb:do_compile failed with exit code '1'`), this can be due to a corrupt download. You should clean the download and try the build again. Run the following commands and build again:    
 
 ```
 container> bitbake -c cleansstate gcc-cross 
@@ -83,7 +83,7 @@ See the Karo documentation on Yocto for more details on builds:
 https://karo-electronics.github.io/docs/yocto-guide/mainline/setup.html  
   
 After the image is built, it is safe to exit and/or delete the container. The build directory will persist on the host:  
-**/home/armsdk/docker/volume/yocto/karo-bsp**  
+**~/docker-karo-bsp/hardknott**  
 
   
   
