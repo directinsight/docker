@@ -11,7 +11,7 @@ host> cd ~/docker-karo-bsp/hardknott
 Download the docker image and run the container:
 
 ```
-host> docker run --name yocto-hardknott_karo-bsp --rm -it -v ./:/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp  
+host> docker run --name yocto-hardknott_karo-bsp --rm -it -v "$PWD":/home/yoctosdk wrwdi/yocto-hardknott_karo-bsp  
 ```
 
 The **/home/yoctosdk** directory inside the container will be mounted as a docker volume (**~/docker-karo-bsp/hardknott**) on the host.  
