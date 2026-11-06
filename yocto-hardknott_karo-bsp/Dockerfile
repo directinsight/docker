@@ -2,8 +2,8 @@
 
 ## https://hub.docker.com/r/wrwdi/yocto-hardknott_karo-bsp
 
-## Create a file called Dockerfile containing this text and add to a directory on your host
-## Now Run this Dockerfile with the command below in the same directory as the Dockerfile:
+## Create a file called Dockerfile containing this text and add to a directory on your host along with the two scripts
+## bsp_config.sh and bsp_fix_recipe.sh. Now Run this Dockerfile with the command below in the same directory as the Dockerfile:
 ## docker build --tag <Docker IMAGE Name> .
 ## Final image name should be "wrwdi/yocto-hardknott_karo-bsp:<TAG>"  
 ## Example (note the "." at the end of the command):
@@ -36,19 +36,19 @@ ENV LC_ALL=en_US.UTF-8
 
 
 ARG USER_UID=1000
-   ARG USER_GID=1000
-   RUN groupadd -g ${USER_GID} yoctosdk && \
-       useradd -m -s /bin/bash -u ${USER_UID} -g ${USER_GID} yoctosdk && \
-       echo 'yoctosdk:yoctosdk' | chpasswd && \
-       usermod -aG sudo yoctosdk
-
-COPY --chown=yoctosdk:yoctosdk --chmod=755 bsp_config.sh bsp_fix_recipe.sh /home/yoctosdk/
+ARG USER_GID=1000
+RUN groupadd -g ${USER_GID} yoctosdk && \
+    useradd -m -s /bin/bash -u ${USER_UID} -g ${USER_GID} yoctosdk && \
+    echo 'yoctosdk:yoctosdk' | chpasswd && \
+    usermod -aG sudo yoctosdk
 
 RUN curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o /usr/local/bin/repo && \
     chmod a+rx /usr/local/bin/repo
     
+COPY --chown=yoctosdk:yoctosdk --chmod=755 bsp_config.sh bsp_fix_recipe.sh /home/yoctosdk/
+    
 USER yoctosdk
-    RUN mkdir -p /home/yoctosdk/work && \
+RUN mkdir -p /home/yoctosdk/work && \
     git config --global user.name "yoctosdk" && \
     git config --global user.email "yoctosdk@yoctosdk.com" && \
     git config --global color.ui auto
