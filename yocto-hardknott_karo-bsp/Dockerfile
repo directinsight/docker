@@ -11,8 +11,6 @@
 
 ## It is safe to ignore error messages:
 ## "debconf: delaying package configuration, since apt-utils is not installed"
-## "warning: Setting locale failed"
-
 
 ## Yocto Requirements for Hardknott:
 ## <https://docs.yoctoproject.org/3.3.2/ref-manual/system-requirements.html#supported-linux-distributions>
@@ -20,7 +18,7 @@
 ## debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm python3-subunit mesa-common-dev
 
 ## Start build
-FROM ubuntu:20.04
+FROM ubuntu:20.04@sha256:8feb4d8ca5354def3d8fce243717141ce31e2c428701f6682bd2fafe15388214
 LABEL org.opencontainers.image.title="yocto-hardknott_karo-bsp" \
       org.opencontainers.image.description="Build environment for the Karo TX6 Yocto hardknott BSP" \
       org.opencontainers.image.source="https://github.com/directinsight/docker/tree/master/yocto-hardknott_karo-bsp" \
@@ -34,30 +32,35 @@ RUN apt-get install -y gcc build-essential chrpath socat cpio python3 python3-pi
 #RUN dpkg-reconfigure locales <select 159. en_US.UTF-8 UTF-8>
 ## For noninteractive see: <https://serverfault.com/questions/362903/how-do-you-set-a-locale-non-interactively-on-debian-ubuntu>:
 
-RUN locale-gen en_US.UTF-8
+RUN apt-get install -y locales && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8
+
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
+
 ARG UID=1000 GID=1000
-RUN apt-get install -y locales && \
-    echo "$LANG UTF-8" > /etc/locale.gen && \
-    dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=$LANG && \
-    useradd -ms /bin/bash yoctosdk && \
+RUN useradd -ms /bin/bash yoctosdk && \
     echo 'yoctosdk:yoctosdk' | chpasswd && \
     usermod -aG sudo yoctosdk
-    
-## The above generates warnings about "Setting locale failed" but it still seems to work okay
-   
-COPY bsp_config.sh /bsp_config.sh
-RUN chmod a+xr /bsp_config.sh
 
-COPY bsp_fix_recipe.sh /bsp_fix_recipe.sh
-RUN chmod a+xr /bsp_fix_recipe.sh
+COPY bsp_config.sh /home/yoctosdk/bsp_config.sh
+RUN chmod a+xr /home/yoctosdk/bsp_config.sh
+
+COPY bsp_fix_recipe.sh /home/yoctosdk/bsp_fix_recipe.sh
+RUN chmod a+xr /home/yoctosdk/bsp_fix_recipe.sh
 
 ## Note need to add the correct path for repo to /etc/profile since it does not get read correctly in the .bashrc, see:
 ## <https://stackoverflow.com/questions/55206227/why-bashrc-is-not-executed-when-run-docker-container>
     
+RUN chown yoctosdk /home/yoctosdk/bsp_config.sh
+RUN chgrp yoctosdk /home/yoctosdk/bsp_config.sh
+RUN chown yoctosdk /home/yoctosdk/bsp_fix_recipe.sh
+RUN chgrp yoctosdk /home/yoctosdk/bsp_fix_recipe.sh
+
 USER yoctosdk
+RUN mkdir -p /home/yoctosdk/work
+
 
 ## The below cmmmands all done in the "bsp_config.sh" script which the user should run at first login
     	
@@ -75,7 +78,7 @@ USER yoctosdk
 #    ../bin/repo init -u https://github.com/karo-electronics/karo-bsp -b hardknott && \
 #    ../bin/repo sync
 
-WORKDIR /home/yoctosdk    
+WORKDIR /home/yoctosdk/work   
 SHELL ["/bin/bash", "-c"]
 #SHELL ["/bin/bash", "--login"]
 #CMD /bin/bash

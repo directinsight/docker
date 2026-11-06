@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # There is no sstate cache for the hardknott branch on Karo's sstate mirror; remove it from the **local.conf** file:
-sed -i '19,21d' conf/local.conf
+#sed -i '19,21d' conf/local.conf
+sed -i '/sstate.karo-electronics.de/d' conf/local.conf
 
 # Fix /etc/fstab for TX6:
 sed -i 's\PARTLABEL=rootfs\PARTUUID=0cc66cc0-02\g' ../layers/meta-karo-distro/recipes-core/base-files/base-files/fstab
